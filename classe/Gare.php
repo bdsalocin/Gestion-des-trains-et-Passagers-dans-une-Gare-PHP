@@ -1,51 +1,31 @@
 <?php
-require_once '../classe/Gare.php';
-require_once '../classe/Passager.php';
-
 class Gare {
-    public int $idTrain;
-    public string $destination;
-    public int $heureDepart;
-    public string $plateforme;
-    public string $passager;
+    public static function afficherInfoTrain(Train $train, array $passagers) {
+        echo    "=== Train n°" 
+                . $train->idTrain
+                . " | Destination : " 
+                . $train->destination
+                . " | Départ : " 
+                . $train->heureDepart
+                . " | Plateforme : " 
+                . $train->plateforme 
+                . " ===\n";
 
+        $passagersAssigne = false;
+        
+        foreach ($passagers as $passager) {
+            if ($passager->idTrain === $train->idTrain) {
+                echo    " - Passager : " 
+                        . $passager->passager
+                        . "\n";
 
-    public function __construct($idTrain, $destination, $heureDepart, $plateforme, $passager) {
-        $this->idTrain = $idTrain;
-        $this->destination = $destination;
-        $this->heureDepart = $heureDepart;
-        $this->plateforme = $plateforme;
-        $this->passager = $passager;
+                $passagersAssigne = true;
+            }
+        }
+
+        if (!$passagersAssigne) {
+            echo " Aucun passager assigné.\n";
+        }
     }
-
-    public static function afficherInfoGare(Gare $gare) {
-    echo " === Train : "    . $gare->idTrain 
-                            . " | Destination : " 
-                            . $gare->destination 
-                            . " | Départ : " 
-                            . $gare->heureDepart
-                            . "H | Plateforme : "
-                            . $gare->plateforme
-                            . " - Passager : " 
-                            . $gare->passager
-                            . " - Passager : " 
-                            . $gare->passager
-                            . " === "
-                            . " \n"; 
-    }
-
-    public static function ajouterGare($idTrain, $destination, $heureDepart, $plateforme, $passager) {
-        return new self($idTrain, $destination, $heureDepart, $plateforme, $passager);
-    }
-
 }
 
-$gares = [
-    $gare1 = Gare::ajouterGare(1, "Barcelone", 12, "A", "Pedro", "Gavi"),
-    $gare2 = Gare::ajouterGare(2, "Madrid", 10, "B", "Rodrigo"),
-    $gare3 = Gare::ajouterGare(3, "Paris", 14, "C", "Aucun passager assigné")
-];
-
-foreach($gares as $gare) {
-Gare::afficherInfoGare($gare);
-}

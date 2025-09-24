@@ -12,7 +12,7 @@ class Passager {
         $this->idTrain = $idTrain;
     }
 
-    public static function afficherPassagers(Passager $passager) {
+    public static function afficherPassager(Passager $passager) {
         echo "Passager : "  . $passager->passager 
                             . " | Billet n° " 
                             . $passager->numeroBillet 
@@ -24,14 +24,4 @@ class Passager {
     public static function ajouterPassager($passager, $numeroBillet, $idTrain) {
         return new self($passager, $numeroBillet, $idTrain);
     }
-}
-
-$passagers = [
-    $passager1 = Passager::ajouterPassager("Pedri", 101, 1),
-    $passager2 = Passager::ajouterPassager("Gavi", 102, 1),
-    $passager3 = Passager::ajouterPassager("Rodrigo", 103, 2)
-];
-
-foreach($passagers as $passager) {
-    Passager::afficherPassagers($passager);
 }
